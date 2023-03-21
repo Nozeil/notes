@@ -1,7 +1,7 @@
 import type { NotesData } from '@/models/NotesData';
 import axios from 'axios';
 
-const BASE_URL = 'https://courageous-curious-krill.glitch.me/notes';
+const BASE_URL = 'https://glory-woolen-wren.glitch.me/notes';
 
 const apiClient = axios.create({
   baseURL: BASE_URL,

@@ -1,8 +1,10 @@
-interface Note {
+import { StringObject } from '@/types';
+
+export interface Note {
   id: string;
   title: string;
   content: string;
-  tags: { [k: string]: string };
+  tags: StringObject;
 }
 
 export type NotesData = Note[];

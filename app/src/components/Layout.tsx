@@ -1,13 +1,9 @@
-import { useAppDispatch } from '@/hooks/hooks';
-import { getNotes } from '@/redux/notesSlice';
-import { useEffect } from 'react';
+import { NotesList } from './NotesList';
 
 export function Layout() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getNotes());
-  }, []);
-
-  return <div>Layout</div>;
+  return (
+    <main>
+      <NotesList />
+    </main>
+  );
 }
