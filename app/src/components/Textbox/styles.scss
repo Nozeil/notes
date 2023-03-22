@@ -1,0 +1,33 @@
+.textbox {
+  position: relative;
+  z-index: 1;
+
+  &__editor,
+  &__placeholder {
+    width: 200px;
+    height: 200px;
+    padding: 0;
+    border: 1px solid #eee;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    background: transparent;
+    outline: none;
+    resize: none;
+  }
+
+  &__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: transparent;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    z-index: -1;
+  }
+
+  &__placeholder mark {
+    color: transparent;
+    border-radius: 2px;
+    background: #fcc;
+  }
+}

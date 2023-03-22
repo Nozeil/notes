@@ -1,10 +1,19 @@
+import { useAppDispatch } from '@/hooks/hooks';
+import { createNote, getNotes } from '@/redux/notesSlice';
+import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { Textarea } from '../Textarea';
+import { TextBox } from '../TextBox';
 import { TextInput } from '../TextInput';
 import { Messages, Names, Placeholders } from './constants';
-import type { FormData } from './types';
+import type { FormData } from '@/types';
+import { transformData } from '@/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 export function AddNoteForm() {
+  const hashtagsRef = useRef<string[]>([]);
+  const dispatch = useAppDispatch();
+  const id = uuidv4();
+
   const { TITLE_NAME, CONTENT_NAME } = Names;
   const { TITLE_PLACEHOLDER, CONTENT_PLACEHOLDER } = Placeholders;
   const { TITLE_MESSAGE, CONTENT_MESSAGE } = Messages;
@@ -21,9 +30,11 @@ export function AddNoteForm() {
     },
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    const transformedData = transformData(data, hashtagsRef.current);
     reset();
+    await dispatch(createNote(transformedData));
+    await dispatch(getNotes());
   };
 
   return (
@@ -36,7 +47,9 @@ export function AddNoteForm() {
             required: { value: true, message: TITLE_MESSAGE },
           })}
         />
-        <Textarea
+        <TextBox
+          key={id}
+          hashtagsRef={hashtagsRef}
           placeholder={CONTENT_PLACEHOLDER}
           error={errors.content}
           {...register(CONTENT_NAME, {

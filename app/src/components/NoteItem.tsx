@@ -1,3 +1,5 @@
+import { HashtagsList } from './HashtagsList';
+
 interface Props {
   title: string;
   content: string;
@@ -9,7 +11,7 @@ export function NoteItem({ title, content, tags }: Props) {
     <li>
       <h3>{title}</h3>
       <p>{content}</p>
-      <p>{tags}</p>
+      <HashtagsList tags={tags} />
     </li>
   );
 }

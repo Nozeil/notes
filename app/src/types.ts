@@ -1,3 +1,4 @@
+import { MutableRefObject } from 'react';
 import { ChangeHandler, FieldError } from 'react-hook-form';
 
 export interface StringObject {
@@ -9,4 +10,13 @@ export interface FormFieldProps {
   onChange: ChangeHandler;
   placeholder: string;
   error: FieldError | undefined;
+}
+
+export interface TextboxProps extends FormFieldProps {
+  hashtagsRef: MutableRefObject<string[]>;
+}
+
+export interface FormData {
+  title: string;
+  content: string;
 }
