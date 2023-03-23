@@ -20,3 +20,5 @@ export interface FormData {
   title: string;
   content: string;
 }
+
+export type EmptyObject = Record<string, never>;

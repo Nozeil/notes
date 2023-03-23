@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/hooks/hooks';
+import { useAppDispatch } from '@/hooks';
 import { createNote, getNotes } from '@/redux/notesSlice';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';

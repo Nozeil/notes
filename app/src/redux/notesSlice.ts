@@ -1,6 +1,7 @@
 import type { ErrorResponse } from '@/models/ErrorResponse';
 import type { NoteRequest, NoteResponse, NotesData } from '@/models/Notes';
 import { notesApi } from '@/services/notes';
+import { EmptyObject } from '@/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
@@ -39,6 +40,10 @@ export const createNote = asyncThunkWithAxiosError<NoteResponse, NoteRequest>(
   'createNote',
   notesApi.createNote
 );
+export const deleteNote = asyncThunkWithAxiosError<EmptyObject, number>(
+  'deleteNote',
+  notesApi.deleteNote
+);
 
 const notesSlice = createSlice({
   name: 'notes',
@@ -51,6 +56,9 @@ const notesSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(createNote.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(deleteNote.fulfilled, (state, action) => {
         console.log(action.payload);
       });
   },

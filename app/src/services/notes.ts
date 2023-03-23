@@ -1,4 +1,5 @@
 import type { NoteRequest, NoteResponse, NotesData } from '@/models/Notes';
+import { EmptyObject } from '@/types';
 import axios from 'axios';
 
 const BASE_URL = 'https://glory-woolen-wren.glitch.me/notes';
@@ -21,4 +22,9 @@ const createNote = async ({ title, content, tags }: NoteRequest) => {
   return resp.data;
 };
 
-export const notesApi = { getNotes, createNote };
+const deleteNote = async (id: number) => {
+  const resp = await apiClient.delete<EmptyObject>(`${id}`);
+  return resp.data;
+};
+
+export const notesApi = { getNotes, createNote, deleteNote };

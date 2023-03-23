@@ -1,4 +1,4 @@
-import { useDebounce } from '@/hooks/hooks';
+import { useDebounce } from '@/hooks';
 import { TextboxProps } from '@/types';
 import { findHashtags, replaceHashtags } from '@/utils';
 import { ChangeEvent, forwardRef, useState } from 'react';

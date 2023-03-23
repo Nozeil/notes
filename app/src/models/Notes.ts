@@ -1,7 +1,7 @@
 import { StringObject } from '@/types';
 
 export interface NoteResponse {
-  id: string;
+  id: number;
   title: string;
   content: string;
   tags: StringObject;

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks';
 import { getNotes } from '@/redux/notesSlice';
 import { StringObject } from '@/types';
 import { useEffect } from 'react';
@@ -20,6 +20,7 @@ export function NotesList() {
         {notes.map((note) => (
           <NoteItem
             key={note.id}
+            id={note.id}
             title={note.title}
             content={note.content}
             tags={createTagsArr(note.tags)}
