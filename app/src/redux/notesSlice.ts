@@ -14,35 +14,31 @@ const initialState: NotesState = {
   notes: [],
 };
 
-export const getNotes = createAsyncThunk<
-  NotesData,
-  void,
-  {
-    rejectValue: number | undefined;
-  }
->('getAllNotes', async (_, thunkApi) => {
-  try {
-    const resp = await notesApi.getNotes();
-    return resp;
-  } catch (e) {
-    return thunkApi.rejectWithValue((<AxiosError<ErrorResponse>>e).response?.status);
-  }
-});
+const asyncThunkWithAxiosError = <thunkResponse, thunkRequest>(
+  type: string,
+  apiCall: (params: thunkRequest) => Promise<thunkResponse>
+) => {
+  return createAsyncThunk<
+    thunkResponse,
+    thunkRequest,
+    {
+      rejectValue: number | undefined;
+    }
+  >(type, async (data, thunkApi) => {
+    try {
+      const resp = await apiCall(data);
+      return resp;
+    } catch (e) {
+      return thunkApi.rejectWithValue((<AxiosError<ErrorResponse>>e).response?.status);
+    }
+  });
+};
 
-export const createNote = createAsyncThunk<
-  NoteResponse,
-  NoteRequest,
-  {
-    rejectValue: number | undefined;
-  }
->('createNote', async (data, thunkApi) => {
-  try {
-    const resp = await notesApi.createNote(data);
-    return resp;
-  } catch (e) {
-    return thunkApi.rejectWithValue((<AxiosError<ErrorResponse>>e).response?.status);
-  }
-});
+export const getNotes = asyncThunkWithAxiosError<NotesData, void>('getAllNotes', notesApi.getNotes);
+export const createNote = asyncThunkWithAxiosError<NoteResponse, NoteRequest>(
+  'createNote',
+  notesApi.createNote
+);
 
 const notesSlice = createSlice({
   name: 'notes',
