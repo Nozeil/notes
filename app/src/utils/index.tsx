@@ -9,11 +9,12 @@ export const replaceHashtags = (text: string) => {
 };
 
 export const findHashtags = (text: string) => {
-  return text.match(exp) || [];
+  const hashTags = text.match(exp) || [];
+  const uniqueHashTags = new Set(hashTags);
+  return Array.from(uniqueHashTags);
 };
 
 export const transformData = (data: FormData, tags: string[], id?: number) => {
-  console.log(tags);
   const transformedTags = tags.reduce<StringObject>((acc, curr) => {
     acc[curr] = curr;
     return acc;
