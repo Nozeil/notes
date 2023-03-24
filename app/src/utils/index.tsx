@@ -12,10 +12,12 @@ export const findHashtags = (text: string) => {
   return text.match(exp) || [];
 };
 
-export const transformData = (data: FormData, tags: string[]) => {
+export const transformData = (data: FormData, tags: string[], id?: number) => {
+  console.log(tags);
   const transformedTags = tags.reduce<StringObject>((acc, curr) => {
     acc[curr] = curr;
     return acc;
   }, {});
-  return { ...data, tags: transformedTags };
+  const result = id ? { ...data, tags: transformedTags, id } : { ...data, tags: transformedTags };
+  return result;
 };

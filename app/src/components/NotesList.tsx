@@ -15,18 +15,16 @@ export function NotesList() {
   }, [dispatch]);
 
   return (
-    <section>
-      <ul>
-        {notes.map((note) => (
-          <NoteItem
-            key={note.id}
-            id={note.id}
-            title={note.title}
-            content={note.content}
-            tags={createTagsArr(note.tags)}
-          />
-        ))}
-      </ul>
-    </section>
+    <ul>
+      {notes.map((note) => (
+        <NoteItem
+          key={note.id}
+          id={note.id}
+          title={note.title}
+          content={note.content}
+          tags={createTagsArr(note.tags)}
+        />
+      ))}
+    </ul>
   );
 }

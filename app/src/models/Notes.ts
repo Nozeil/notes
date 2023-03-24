@@ -1,12 +1,17 @@
 import { StringObject } from '@/types';
 
-export interface NoteResponse {
-  id: number;
+interface Note {
   title: string;
   content: string;
   tags: StringObject;
 }
 
-export type NoteRequest = Omit<NoteResponse, 'id'>;
+export interface NoteResponse extends Note {
+  id: number;
+}
+
+export interface NoteRequest extends Note {
+  id?: number;
+}
 
 export type NotesData = NoteResponse[];

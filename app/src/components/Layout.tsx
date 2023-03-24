@@ -4,8 +4,12 @@ import { NotesList } from './NotesList';
 export function Layout() {
   return (
     <main>
-      <AddNoteForm />
-      <NotesList />
+      <section>
+        <AddNoteForm />
+      </section>
+      <section>
+        <NotesList />
+      </section>
     </main>
   );
 }

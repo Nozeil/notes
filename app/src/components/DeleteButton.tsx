@@ -1,3 +1,4 @@
+import { BUTTONS_VALUES } from '@/constants';
 import { useAppDispatch } from '@/hooks';
 import { deleteNote, getNotes } from '@/redux/notesSlice';
 
@@ -13,5 +14,5 @@ export function DeleteButton({ id }: Props) {
     await dispatch(getNotes());
   };
 
-  return <button onClick={onClick}>Delete</button>;
+  return <button onClick={onClick}>{BUTTONS_VALUES.DELETE}</button>;
 }

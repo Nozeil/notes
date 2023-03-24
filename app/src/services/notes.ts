@@ -27,4 +27,13 @@ const deleteNote = async (id: number) => {
   return resp.data;
 };
 
-export const notesApi = { getNotes, createNote, deleteNote };
+const updateNote = async ({ title, content, tags, id }: NoteRequest) => {
+  const resp = await apiClient.put<NoteResponse>(`${id}`, {
+    title,
+    content,
+    tags,
+  });
+  return resp.data;
+};
+
+export const notesApi = { getNotes, createNote, deleteNote, updateNote };

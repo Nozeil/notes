@@ -1,5 +1,5 @@
 import { MutableRefObject } from 'react';
-import { ChangeHandler, FieldError } from 'react-hook-form';
+import { ChangeHandler, FieldError, UseFormReset } from 'react-hook-form';
 
 export interface StringObject {
   [k: string]: string;
@@ -14,6 +14,7 @@ export interface FormFieldProps {
 
 export interface TextboxProps extends FormFieldProps {
   hashtagsRef: MutableRefObject<string[]>;
+  initialContent?: string;
 }
 
 export interface FormData {
@@ -22,3 +23,9 @@ export interface FormData {
 }
 
 export type EmptyObject = Record<string, never>;
+
+export type SubmitHandler = (
+  data: FormData,
+  ref: MutableRefObject<string[]>,
+  reset: UseFormReset<FormData>
+) => Promise<void>;

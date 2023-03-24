@@ -44,6 +44,10 @@ export const deleteNote = asyncThunkWithAxiosError<EmptyObject, number>(
   'deleteNote',
   notesApi.deleteNote
 );
+export const updateNote = asyncThunkWithAxiosError<NoteResponse, NoteRequest>(
+  'updateNote',
+  notesApi.updateNote
+);
 
 const notesSlice = createSlice({
   name: 'notes',
@@ -60,6 +64,10 @@ const notesSlice = createSlice({
       })
       .addCase(deleteNote.fulfilled, (state, action) => {
         console.log(action.payload);
+      })
+      .addCase(updateNote.fulfilled, (state, action) => {
+        const updatedNote = action.payload;
+        state.notes = state.notes.map((note) => (note.id === updatedNote.id ? updatedNote : note));
       });
   },
 });

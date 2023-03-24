@@ -5,10 +5,17 @@ import { ChangeEvent, forwardRef, useState } from 'react';
 import { HashtagsList } from '../HashtagsList';
 import './styles.scss';
 
+function getDefault<T, K>(fn: (initialContent: T) => K, initialContent?: T) {
+  return initialContent ? fn(initialContent) : [];
+}
+
 export const TextBox = forwardRef<HTMLTextAreaElement, TextboxProps>(
-  ({ name, onChange, placeholder, error, hashtagsRef }, ref) => {
-    const [content, setContent] = useState<ReturnType<typeof replaceHashtags>>([]);
-    const [hashtags, setHashtags] = useState<string[]>([]);
+  ({ name, onChange, placeholder, error, hashtagsRef, initialContent }, ref) => {
+    const defaultContent = getDefault(replaceHashtags, initialContent);
+    const defaultHashtags = getDefault(findHashtags, initialContent);
+
+    const [content, setContent] = useState<ReturnType<typeof replaceHashtags>>(defaultContent);
+    const [hashtags, setHashtags] = useState<string[]>(defaultHashtags);
     const debouncedHashtags = useDebounce(hashtags, 1000);
 
     const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
