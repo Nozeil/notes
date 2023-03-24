@@ -1,3 +1,5 @@
+@use '../../scss/placeholders';
+
 .textbox {
   position: relative;
   z-index: 1;
@@ -26,8 +28,7 @@
   }
 
   &__placeholder mark {
-    color: transparent;
-    border-radius: 2px;
+    @extend .mark;
     background: #fcc;
   }
 }

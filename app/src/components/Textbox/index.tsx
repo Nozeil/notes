@@ -3,7 +3,7 @@ import { TextboxProps } from '@/types';
 import { findHashtags, replaceHashtags } from '@/utils';
 import { ChangeEvent, forwardRef, useState } from 'react';
 import { HashtagsList } from '../HashtagsList';
-import './styles.scss';
+import './index.styles.scss';
 
 function getDefault<T, K>(fn: (initialContent: T) => K, initialContent?: T) {
   return initialContent ? fn(initialContent) : [];
