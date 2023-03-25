@@ -1,9 +1,9 @@
 import { useAppDispatch } from '@/hooks';
-import { transformData } from '@/utils';
 import { SubmitHandler } from '@/types';
 import { Form } from './Form';
-import { updateNote } from '@/redux/notesSlice';
+import { getNotes, updateNote } from '@/redux/notesSlice';
 import { BUTTONS_VALUES } from '@/constants';
+import { transformData } from '@/utils';
 
 interface Props {
   id: number;
@@ -22,6 +22,7 @@ export function EditNoteForm({ id, title, content, toggler }: Props) {
     }
     const transformedData = transformData(data, ref.current, id);
     await dispatch(updateNote(transformedData));
+    await dispatch(getNotes());
   };
 
   return (

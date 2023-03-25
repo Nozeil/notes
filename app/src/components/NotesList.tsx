@@ -1,14 +1,19 @@
+import { initialFilter } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/hooks';
+import { NotesData } from '@/models/Notes';
 import { getNotes } from '@/redux/notesSlice';
-import { StringObject } from '@/types';
 import { useEffect } from 'react';
 import { NoteItem } from './NoteItem';
 
-const createTagsArr = (tags: StringObject) => Object.values(tags);
+function filterNotes(notes: NotesData, filter: string) {
+  return filter === initialFilter ? notes : notes.filter((note) => note.tags.includes(filter));
+}
 
 export function NotesList() {
+  const filter = useAppSelector((state) => state.notes.filter);
   const notes = useAppSelector((state) => state.notes.notes);
   const dispatch = useAppDispatch();
+  const filteredNotes = filterNotes(notes, filter);
 
   useEffect(() => {
     dispatch(getNotes());
@@ -16,13 +21,13 @@ export function NotesList() {
 
   return (
     <ul>
-      {notes.map((note) => (
+      {filteredNotes.map((note) => (
         <NoteItem
           key={note.id}
           id={note.id}
           title={note.title}
           content={note.content}
-          tags={createTagsArr(note.tags)}
+          tags={note.tags}
         />
       ))}
     </ul>

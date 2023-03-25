@@ -1,18 +1,24 @@
+import { initialFilter } from '@/constants';
 import type { ErrorResponse } from '@/models/ErrorResponse';
 import type { NoteRequest, NoteResponse, NotesData } from '@/models/Notes';
 import { notesApi } from '@/services/notes';
 import { EmptyObject } from '@/types';
+import { getAllTagsFromNotes } from '@/utils';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 interface NotesState {
   isLoading: boolean;
   notes: NotesData;
+  filter: string;
+  allTags: string[];
 }
 
 const initialState: NotesState = {
   isLoading: true,
   notes: [],
+  filter: initialFilter,
+  allTags: [],
 };
 
 const asyncThunkWithAxiosError = <thunkResponse, thunkRequest>(
@@ -52,11 +58,16 @@ export const updateNote = asyncThunkWithAxiosError<NoteResponse, NoteRequest>(
 const notesSlice = createSlice({
   name: 'notes',
   initialState,
-  reducers: {},
+  reducers: {
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getNotes.fulfilled, (state, action) => {
         state.notes = action.payload;
+        state.allTags = [initialFilter, ...getAllTagsFromNotes(action.payload)];
         state.isLoading = false;
       })
       .addCase(createNote.fulfilled, (state, action) => {
@@ -66,10 +77,11 @@ const notesSlice = createSlice({
         console.log(action.payload);
       })
       .addCase(updateNote.fulfilled, (state, action) => {
-        const updatedNote = action.payload;
-        state.notes = state.notes.map((note) => (note.id === updatedNote.id ? updatedNote : note));
+        console.log(action.payload);
       });
   },
 });
+
+export const setFilter = notesSlice.actions.setFilter;
 
 export default notesSlice.reducer;

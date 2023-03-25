@@ -1,9 +1,10 @@
 import { useAppDispatch } from '@/hooks';
 import { createNote, getNotes } from '@/redux/notesSlice';
 import { SubmitHandler } from '@/types';
-import { transformData } from '@/utils';
+
 import { Form } from './Form';
 import { BUTTONS_VALUES } from '@/constants';
+import { transformData } from '@/utils';
 
 export function AddNoteForm() {
   const dispatch = useAppDispatch();

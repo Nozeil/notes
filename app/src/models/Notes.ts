@@ -1,9 +1,7 @@
-import { StringObject } from '@/types';
-
 interface Note {
   title: string;
   content: string;
-  tags: StringObject;
+  tags: string[];
 }
 
 export interface NoteResponse extends Note {

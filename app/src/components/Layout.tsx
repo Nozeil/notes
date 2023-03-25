@@ -1,4 +1,5 @@
 import { AddNoteForm } from './AddNoteForm';
+import { FiltersList } from './FiltersList';
 import { NotesList } from './NotesList';
 
 export function Layout() {
@@ -8,6 +9,7 @@ export function Layout() {
         <AddNoteForm />
       </section>
       <section>
+        <FiltersList />
         <NotesList />
       </section>
     </main>

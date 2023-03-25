@@ -4,3 +4,5 @@ export const BUTTONS_VALUES = {
   SAVE: 'Save',
   DELETE: 'Delete',
 } as const;
+
+export const initialFilter = 'All';

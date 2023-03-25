@@ -1,10 +1,6 @@
 import { MutableRefObject } from 'react';
 import { ChangeHandler, FieldError, UseFormReset } from 'react-hook-form';
 
-export interface StringObject {
-  [k: string]: string;
-}
-
 export interface FormFieldProps {
   name: string;
   onChange: ChangeHandler;
