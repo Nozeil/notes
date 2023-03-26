@@ -1,17 +1,17 @@
 import reactStringReplace from 'react-string-replace';
 import type { FormData } from '@/types';
 import { NoteResponse } from '@/models/Notes';
-
-const exp = /(#+[a-z0-9]{1,})/gi;
+import { HASH_EX, LINEFEED_EX } from './index.constants';
 
 export const getUniqTags = (tags: string[]) => Array.from(new Set(tags));
 
 export const replaceHashtags = (text: string) => {
-  return reactStringReplace(text, exp, (match, i) => <mark key={i}>{match}</mark>);
+  const newText = text.replace(LINEFEED_EX, '\n\n');
+  return reactStringReplace(newText, HASH_EX, (match, i) => <mark key={i}>{match}</mark>);
 };
 
 export const findHashtags = (text: string) => {
-  const hashTags = text.match(exp) || [];
+  const hashTags = text.match(HASH_EX) || [];
   return getUniqTags(hashTags);
 };
 

@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { setFilter } from '@/redux/notesSlice';
 import { v4 as uuidv4 } from 'uuid';
+import './index.style.scss';
 
 export function FiltersList() {
   const filter = useAppSelector((state) => state.notes.filter);
@@ -14,10 +15,13 @@ export function FiltersList() {
     dispatch(setFilter(tag));
   };
 
+  const setItemClassName = (tag: string) =>
+    tag === filter ? 'filters-list__item filters-list__item_active' : 'filters-list__item';
+
   return (
-    <ul>
+    <ul className="filters-list">
       {allTags.map((tag) => (
-        <li key={uuidv4()} onClick={() => onClick(tag)}>
+        <li className={setItemClassName(tag)} key={uuidv4()} onClick={() => onClick(tag)}>
           {tag}
         </li>
       ))}

@@ -1,0 +1,48 @@
+@use '../../scss/placeholders';
+@use '../../scss/variables';
+
+.note-item {
+  @extend .transition;
+  position: relative;
+  width: 300px;
+  height: 260px;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: variables.$font-size-m;
+  background-color: variables.$light-m;
+  cursor: pointer;
+
+  &__container {
+    @extend .column-20;
+  }
+
+  &:hover {
+    background-color: variables.$light-s;
+  }
+
+  &__delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: variables.$light-xs no-repeat center/contain url('/remove.svg');
+    cursor: pointer;
+    box-shadow: variables.$shadow;
+  }
+
+  &__content {
+    height: 120px;
+    overflow: auto;
+  }
+
+  &__content mark {
+    @extend .mark;
+    background-color: transparent;
+    color: blue;
+  }
+}

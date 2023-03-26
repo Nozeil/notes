@@ -1,0 +1,9 @@
+@use './../../scss/placeholders';
+
+.form {
+  @extend .column-20;
+
+  &__button {
+    @extend .button;
+  }
+}

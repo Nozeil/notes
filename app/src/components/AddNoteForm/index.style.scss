@@ -1,0 +1,11 @@
+@use '../../scss/placeholders';
+@use '../../scss/variables';
+
+.add-note-form {
+  @extend .column-40;
+  width: 100%;
+  max-width: 300px;
+  &__title {
+    font-size: variables.$font-size-l;
+  }
+}

@@ -9,6 +9,7 @@ export interface FormFieldProps {
 }
 
 export interface TextboxProps extends FormFieldProps {
+  isSubmitSuccessful: boolean;
   hashtagsRef: MutableRefObject<string[]>;
   initialContent?: string;
 }

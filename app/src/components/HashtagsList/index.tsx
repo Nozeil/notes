@@ -1,14 +1,15 @@
 import { v4 as uuidv4 } from 'uuid';
+import './index.style.scss';
 
 interface Props {
-  tags: string[];
+  hashtags: string[];
 }
 
-export function HashtagsList({ tags }: Props) {
+export function HashtagsList({ hashtags }: Props) {
   return (
-    <ul>
-      {tags.map((tag) => (
-        <li key={uuidv4()}>{tag}</li>
+    <ul className="hashtags-list">
+      {hashtags.map((hashtag) => (
+        <li key={uuidv4()}>{hashtag}</li>
       ))}
     </ul>
   );

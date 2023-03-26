@@ -1,0 +1,17 @@
+@use './../../scss/variables';
+@use './../../scss/placeholders';
+
+.text-input {
+  @extend .column;
+  &__error {
+    @extend .error-message;
+  }
+}
+.input {
+  @extend .form-field;
+  height: 40px;
+
+  &_error {
+    border-color: variables.$error;
+  }
+}

@@ -1,0 +1,11 @@
+@use './../../scss/variables';
+
+.notes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.title {
+  font-size: variables.$font-size-l;
+}

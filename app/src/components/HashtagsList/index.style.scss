@@ -1,0 +1,8 @@
+@use '../../scss/placeholders';
+@use '../../scss/variables';
+
+.hashtags-list {
+  @extend .row-list;
+  height: 40px;
+  font-size: variables.$font-size-s;
+}

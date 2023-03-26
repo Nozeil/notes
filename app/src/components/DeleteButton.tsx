@@ -1,12 +1,12 @@
-import { BUTTONS_VALUES } from '@/constants';
 import { useAppDispatch } from '@/hooks';
 import { deleteNote, getNotes } from '@/redux/notesSlice';
 
 interface Props {
   id: number;
+  className: string;
 }
 
-export function DeleteButton({ id }: Props) {
+export function DeleteButton({ id, className }: Props) {
   const dispatch = useAppDispatch();
 
   const onClick = async () => {
@@ -14,5 +14,5 @@ export function DeleteButton({ id }: Props) {
     await dispatch(getNotes());
   };
 
-  return <button onClick={onClick}>{BUTTONS_VALUES.DELETE}</button>;
+  return <button className={className} onClick={onClick} />;
 }

@@ -1,0 +1,26 @@
+@use '../../scss/placeholders';
+@use '../../scss/variables';
+
+.filters-list {
+  @extend .row-list;
+  flex-shrink: 0;
+  height: 70px;
+  font-size: variables.$font-size-m;
+
+  &__item {
+    @extend .transition;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: variables.$light-l;
+    cursor: pointer;
+  }
+
+  &__item_active {
+    color: variables.$light-xs;
+    background-color: variables.$dark-s;
+  }
+
+  &__item:hover {
+    @extend .control-hover;
+  }
+}

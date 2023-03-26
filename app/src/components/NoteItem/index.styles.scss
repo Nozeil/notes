@@ -1,9 +1,0 @@
-@use '../../scss/placeholders';
-
-.note-item {
-  &__content mark {
-    @extend .mark;
-    background-color: transparent;
-    color: blue;
-  }
-}

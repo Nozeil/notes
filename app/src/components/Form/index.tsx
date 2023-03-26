@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { CONTENT, TITLE } from './constants';
+import { CONTENT, TITLE } from './index.constants';
 import { TextInput } from '../TextInput';
-import { v4 as uuidv4 } from 'uuid';
 import type { FormData, SubmitHandler } from '@/types';
 import { TextBox } from '../TextBox';
+import './index.style.scss';
 
 interface Props {
   submitHandler: SubmitHandler;
@@ -15,7 +15,6 @@ interface Props {
 
 export function Form({ submitHandler, buttonValue, initialTitle, initialContent }: Props) {
   const hashtagsRef = useRef<string[]>([]);
-  const uuid = uuidv4();
 
   const { TITLE_MESSAGE, TITLE_NAME, TITLE_PLACEHOLDER } = TITLE;
   const { CONTENT_MESSAGE, CONTENT_NAME, CONTENT_PLACEHOLDER } = CONTENT;
@@ -24,7 +23,7 @@ export function Form({ submitHandler, buttonValue, initialTitle, initialContent 
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { isSubmitSuccessful, errors },
   } = useForm<FormData>({
     defaultValues: {
       title: initialTitle || '',
@@ -32,10 +31,12 @@ export function Form({ submitHandler, buttonValue, initialTitle, initialContent 
     },
   });
 
-  const onSubmit = async (data: FormData) => submitHandler(data, hashtagsRef, reset);
+  const onSubmit = async (data: FormData) => {
+    submitHandler(data, hashtagsRef, reset);
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         placeholder={TITLE_PLACEHOLDER}
         error={errors.title}
@@ -44,7 +45,7 @@ export function Form({ submitHandler, buttonValue, initialTitle, initialContent 
         })}
       />
       <TextBox
-        key={uuid}
+        isSubmitSuccessful={isSubmitSuccessful}
         hashtagsRef={hashtagsRef}
         placeholder={CONTENT_PLACEHOLDER}
         error={errors.content}
@@ -53,7 +54,7 @@ export function Form({ submitHandler, buttonValue, initialTitle, initialContent 
           required: { value: true, message: CONTENT_MESSAGE },
         })}
       />
-      <input type="submit" value={buttonValue} />
+      <input className="form__button" type="submit" value={buttonValue} />
     </form>
   );
 }
