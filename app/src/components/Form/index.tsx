@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { CONTENT, TITLE } from './index.constants';
 import { TextInput } from '../TextInput';
 import type { FormData, SubmitHandler } from '@/types';
-import { TextBox } from '../TextBox';
+import { TextBox } from '../Textbox';
 import './index.style.scss';
 
 interface Props {

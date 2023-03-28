@@ -64,21 +64,11 @@ const notesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getNotes.fulfilled, (state, action) => {
-        state.notes = action.payload;
-        state.allTags = [initialFilter, ...getAllTagsFromNotes(action.payload)];
-        state.isLoading = false;
-      })
-      .addCase(createNote.fulfilled, (state, action) => {
-        console.log(action.payload);
-      })
-      .addCase(deleteNote.fulfilled, (state, action) => {
-        console.log(action.payload);
-      })
-      .addCase(updateNote.fulfilled, (state, action) => {
-        console.log(action.payload);
-      });
+    builder.addCase(getNotes.fulfilled, (state, action) => {
+      state.notes = action.payload;
+      state.allTags = [initialFilter, ...getAllTagsFromNotes(action.payload)];
+      state.isLoading = false;
+    });
   },
 });
 
