@@ -1,8 +1,6 @@
 import { initialFilter } from '@/constants';
-import { useAppDispatch, useAppSelector } from '@/hooks';
+import { useAppSelector } from '@/hooks';
 import { NotesData } from '@/models/Notes';
-import { getNotes } from '@/redux/notesSlice';
-import { useEffect } from 'react';
 import { NoteItem } from '../NoteItem';
 import './index.style.scss';
 
@@ -11,13 +9,8 @@ function filterNotes(notes: NotesData, filter: string) {
 }
 
 export function NotesList() {
-  const { filter, notes, isLoading } = useAppSelector((state) => state.notes);
-  const dispatch = useAppDispatch();
+  const { filter, notes } = useAppSelector((state) => state.notes);
   const filteredNotes = filterNotes(notes, filter);
-
-  useEffect(() => {
-    dispatch(getNotes());
-  }, [dispatch]);
 
   const content = notes.length ? (
     <ul className="notes-list">
