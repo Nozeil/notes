@@ -18,6 +18,7 @@ export const TextBox = forwardRef<HTMLTextAreaElement, TextboxProps>(
   ) => {
     const [content, setContent] = useState<ReplacedArr>([]);
     const [hashtags, setHashtags] = useState<string[]>([]);
+    const [isInput, setIsInput] = useState<boolean>(false);
 
     const placeholderRef = useRef<HTMLDivElement>(null);
 
@@ -26,11 +27,7 @@ export const TextBox = forwardRef<HTMLTextAreaElement, TextboxProps>(
       setHashtags(hashtags);
     };
 
-    useEffect(() => {
-      if (isSubmitSuccessful) {
-        setBoxState([], []);
-      }
-    }, [isSubmitSuccessful]);
+    useEffect(() => setBoxState([], []), [isSubmitSuccessful]);
 
     useEffect(() => {
       const defaultContent = getDefault(replaceHashtags, initialContent);
@@ -44,6 +41,7 @@ export const TextBox = forwardRef<HTMLTextAreaElement, TextboxProps>(
       const newContent = replaceHashtags(value);
       const newHashtags = findHashtags(value);
       setBoxState(newContent, newHashtags);
+      setIsInput(true);
       hashtagsRef.current = newHashtags;
     };
 
@@ -69,7 +67,7 @@ export const TextBox = forwardRef<HTMLTextAreaElement, TextboxProps>(
           {content}
         </div>
         <label className="textbox__error">{error && error.message}</label>
-        <DebouncedHashtagsList hashtags={hashtags} />
+        <DebouncedHashtagsList isInput={isInput} hashtags={hashtags} />
       </div>
     );
   }

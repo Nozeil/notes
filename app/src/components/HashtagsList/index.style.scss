@@ -3,6 +3,7 @@
 
 .hashtags-list {
   @extend .row-list;
-  height: 40px;
+  flex-grow: 1;
+  height: 90px;
   font-size: variables.$font-size-s;
 }

@@ -6,12 +6,15 @@
   position: relative;
   z-index: 1;
 
+  &__editor {
+    background-color: transparent;
+  }
+
   &__editor,
   &__placeholder {
     @extend .form-field;
     height: 200px;
     font-family: variables.$font;
-    background-color: transparent;
     resize: none;
   }
 
@@ -20,6 +23,7 @@
     top: 0;
     left: 0;
     color: transparent;
+    background-color: variables.$light-xxs;
     white-space: pre-wrap;
     word-wrap: break-word;
     z-index: -1;

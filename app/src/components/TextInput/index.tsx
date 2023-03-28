@@ -17,7 +17,7 @@ export const TextInput = forwardRef<HTMLInputElement, FormFieldProps>(
           placeholder={placeholder}
           autoComplete="off"
         />
-        <span className="text-input__error">{error && error.message}</span>
+        <label className="text-input__error">{error && error.message}</label>
       </div>
     );
   }

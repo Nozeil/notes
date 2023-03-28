@@ -18,15 +18,15 @@ export function NoteItem({ id, title, content, tags }: Props) {
   const element = isForm ? (
     <EditNoteForm id={id} title={title} content={content} toggler={toggleIsForm} />
   ) : (
-    <li className="note-item">
+    <>
       <div className="note-item__container" onClick={toggleIsForm}>
         <h3>{title}</h3>
         <p className="note-item__content">{replaceHashtags(content)}</p>
         <HashtagsList hashtags={tags} />
       </div>
       <DeleteButton className="note-item__delete-button" id={id} />
-    </li>
+    </>
   );
 
-  return element;
+  return <li className="note-item">{element}</li>;
 }
